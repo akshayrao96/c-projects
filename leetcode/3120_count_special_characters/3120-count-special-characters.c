@@ -18,27 +18,22 @@ static int number_of_special_chars(char* word);
 static bool does_complement_exist(char letter);
 
 int main() {
-
+//TODO
 
 
 }
 
 
 int number_of_special_chars(char* word) {
-
+//TODO
 
 }
 
 bool does_complement_exist(char letter) {
     int num = letter;
-
+//TODO
 
 }
 
 
-/*
-* Traverse once, fill up a char array. Then check later for each lower case, did
-* we find an upper case. If yes
-*
-* 
-*/
+
