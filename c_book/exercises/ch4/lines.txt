@@ -1,0 +1,7 @@
+pattern matching
+for lines that have the key word ould
+for example
+would
+but this line should not be printed
+could and this would be printed
+
