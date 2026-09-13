@@ -45,7 +45,6 @@ int number_of_special_chars(char* word) {
     int lower_mask = 0;
     int upper_mask = 0; 
     int i = 0;
-    int result = 0;
     int c;
     
     while ((c = word[i++]) != '\0') {
@@ -62,11 +61,6 @@ int number_of_special_chars(char* word) {
     
     int common_mask = lower_mask & upper_mask;
     
-    while (common_mask > 0) {
-        result += common_mask & 1;
-        common_mask >>= 1;
-    }
-
-    return result;
+    return __builtin_popcount(common_mask);
 }
 
