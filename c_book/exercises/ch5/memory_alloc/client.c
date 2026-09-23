@@ -6,13 +6,16 @@
 
 int main() {
    
-    size_t first_size = 100;
+    size_t first_size = 10;
     char* buffer = alloc(first_size);
+
     memset(buffer, 'A', first_size);
+    
     buffer[first_size - 1] = '\0';
+
     for (size_t i = 0; i < first_size; i++) {
         printf("%s\n", buffer);
     }
 
-    alloc_free(first_size);
+    alloc_free(buffer);
 }

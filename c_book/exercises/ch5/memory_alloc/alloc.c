@@ -21,12 +21,9 @@ char* alloc(size_t bytes) {
     }
 }
 
-void alloc_free(size_t bytes) {
-    char* base = alloc_buffer;
-    if (alloc_p - bytes < base) {
-        alloc_p = base;
-    } else {
-        alloc_p -= bytes;
+void alloc_free(char* ptr) {
+    if (ptr >= alloc_p && ptr < (alloc_p + BUFFER_LEN)) {
+        ptr = alloc_p;
     }
 }
 
