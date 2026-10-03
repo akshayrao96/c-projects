@@ -6,13 +6,14 @@
  * If can be fulfilled, it's given. Otherwise, informs client of lack of space
  */ 
 
-#define BUFFER_LEN 10000
+#define BUFFER_LEN 100
 
 static char alloc_buffer[BUFFER_LEN];
-static char* alloc_p = alloc_buffer; 
+char* alloc_p = alloc_buffer;
+char* alloc_p_start = alloc_buffer;
 
 char* alloc(size_t bytes) {
-    if (alloc_buffer + BUFFER_LEN - alloc_p > (long) bytes) {
+    if (alloc_buffer + BUFFER_LEN - alloc_p >= (long) bytes) {
         char* curr_ptr = alloc_p;
         alloc_p += bytes;
         return curr_ptr;
@@ -23,9 +24,12 @@ char* alloc(size_t bytes) {
 
 void alloc_free(char* ptr) {
     if (ptr >= alloc_p && ptr < (alloc_p + BUFFER_LEN)) {
-        ptr = alloc_p;
+        alloc_p = ptr;
     }
 }
 
-
-
+void free_space() {
+    char* alloc_p_end = alloc_p_start + BUFFER_LEN;
+    size_t free_space_left = (size_t) (alloc_p_end - alloc_p);
+    printf("size left: %zu\n", free_space_left);
+}

@@ -13,9 +13,12 @@ int main() {
     
     buffer[first_size - 1] = '\0';
 
-    for (size_t i = 0; i < first_size; i++) {
-        printf("%s\n", buffer);
-    }
-
+    printf("%s\n", buffer);
+    
+    // should print 90
+    free_space();
     alloc_free(buffer);
+    
+    // should print 100
+    free_space();
 }
