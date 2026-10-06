@@ -12,9 +12,9 @@ typedef struct {
   Record *data;
   size_t len;
   size_t cap;
-} RecordVec
+} RecordVec;
 
-    typedef struct {
+typedef struct {
   RecordVec *score_list;
   long long total_score;
 } ExamTracker;
@@ -27,6 +27,7 @@ ExamTracker *examTrackerCreate() {
   ExamTracker *obj = (ExamTracker *)malloc(sizeof(ExamTracker));
   obj->score_list = init_record_vec();
   obj->total_score = 0;
+  return obj;
 }
 
 void examTrackerRecord(ExamTracker *obj, int time, int score) {
@@ -41,10 +42,14 @@ long long examTrackerTotalScore(ExamTracker *obj, int startTime, int endTime) {
   return total_score - lowest_score;
 }
 
-void examTrackerFree(ExamTracker *obj) {}
+void examTrackerFree(ExamTracker *obj) {
+  free(obj->score_list->data);
+  free(obj->score_list);
+  free(obj);
+}
 
 RecordVec *init_record_vec() {
-  RecordVec *rec_vec = (*RecordVec)malloc(sizeof(RecordVec));
+  RecordVec *rec_vec = (RecordVec *)malloc(sizeof(RecordVec));
   rec_vec->data = NULL;
   rec_vec->len = 0;
   rec_vec->cap = 0;
@@ -66,11 +71,13 @@ bool push_into_vec(RecordVec *vec, int time, long long scores) {
     vec->cap = new_cap;
   }
 
-  Record curr_record = vec->data[vec->len];
-  curr_record.time = time;
-  curr_record.total_score = scores;
+  Record *curr_record = &vec->data[vec->len];
+  curr_record->time = time;
+  curr_record->total_score = scores;
 
   vec->len++;
+
+  return true;
 }
 
 long long bin_search_floor(RecordVec *scores, int time) {
@@ -84,7 +91,7 @@ long long bin_search_floor(RecordVec *scores, int time) {
     int curr_time = curr.time;
 
     if (time == curr_time) {
-      return curr->total_score;
+      return curr.total_score;
     }
 
     if (time < curr_time) {
@@ -94,7 +101,7 @@ long long bin_search_floor(RecordVec *scores, int time) {
     }
   }
 
-  return right >= 0 ? scores[right].total_score : 0;
+  return right >= 0 ? scores->data[right].total_score : 0;
 }
 
 /**
