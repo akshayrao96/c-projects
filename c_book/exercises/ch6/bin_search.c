@@ -1,6 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 
+/*
+ * Decomposing the problem
+ * 1) we will need to first get our word, make sure its not greater than maxWord
+ * 2) binary search on our array of structs to see which struct it is
+ * 3) If it matches, increment the count field. If not, don't do anything
+ * 4) For each struct, print out the keyword name, and the occurrence
+ */
+
 #define DEFAULT_LEN 50
 #define NKEYS (int)(sizeof(keytab) / sizeof(keytab[0]))
 
@@ -45,11 +53,3 @@ int bin_search(char word[]) {
   }
   return -1;
 }
-
-/*
- * Decomposing the problem
- * 1) we will need to first get our word, make sure its not greater than maxWord
- * 2) binary search on our array of structs to see which struct it is
- * 3) If it matches, increment the count field. If not, don't do anything
- * 4) For each struct, print out the keyword name, and the occurrence
- */

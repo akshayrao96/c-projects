@@ -2,28 +2,25 @@
 #include <string.h>
 
 typedef struct {
-    int* data;
-    size_t cap;
-    size_t len;
+  int *data;
+  size_t cap;
+  size_t len;
 } Vec;
 
-bool push_back(Vec* v, int value) {
+bool push_back(Vec *v, int value) {
 
-    if (v->len == v->cap) {
-        size_t cap = v->cap ? v->cap * 2 : 8;
-        int* data = realloc(v->data, cap * sizeof(*data));
-        
-        if (data == NULL) {
-            return false;
-        }
+  if (v->len == v->cap) {
+    size_t cap = v->cap ? v->cap * 2 : 8;
+    int *data = realloc(v->data, cap * sizeof(*data));
 
-        v->data = data;
-        v->cap = cap;
+    if (data == NULL) {
+      return false;
     }
 
-    v->data[v->len] = value;
-    v->len++;
+    v->data = data;
+    v->cap = cap;
+  }
+
+  v->data[v->len] = value;
+  v->len++;
 }
-
-
-
