@@ -8,8 +8,6 @@
  * contains, is_empty
  */
 
-int main() {}
-
 LinkedList *init_linked_list() {
   LinkedList *list = (LinkedList *)malloc(sizeof(LinkedList));
   list->size = 0;
@@ -41,6 +39,7 @@ void insert_back(LinkedList *list, int val) {
     list->back = new_node;
     curr_back->next = new_node;
   }
+  list->size++;
 }
 
 bool insert(LinkedList *list, int val, int idx) {
@@ -55,16 +54,20 @@ bool insert(LinkedList *list, int val, int idx) {
   } else {
     int curr_idx = 0;
     Node *curr_node = list->front;
+
     while (curr_idx == idx - 1) {
       curr_node = curr_node->next;
+      curr_idx++;
     }
+
     Node *new_node = init_node(val);
     Node *next_node = curr_node->next;
     curr_node->next = new_node;
     new_node->next = next_node;
+    list->size++;
   }
 
-  list->size++;
+  return true;
 }
 
 bool remove_front(LinkedList *list) {
@@ -109,20 +112,30 @@ bool remove_node(LinkedList *list, int idx) {
     return false;
   }
 
+  if (idx == 0) {
+    return remove_front(list);
+  }
+
   int curr_idx = 0;
   Node *curr_node = list->front;
 
   while (curr_idx != idx - 1) {
     curr_node = curr_node->next;
+    curr_idx++;
   }
 
   Node *removal_node = curr_node->next;
   Node *next_node = removal_node->next;
 
   curr_node->next = next_node;
+  if (list->back == removal_node) {
+    list->back = curr_node;
+  }
   free_node(removal_node);
 
   list->size--;
+
+  return true;
 }
 
 bool contains_val(LinkedList *list, int val) {
@@ -137,3 +150,19 @@ bool contains_val(LinkedList *list, int val) {
 }
 
 bool is_empty(LinkedList *list) { return list->size == 0; }
+
+bool get_first_val(LinkedList *list, int *out) {
+  if (list->front == NULL) {
+    return false;
+  }
+  *out = list->front->val;
+  return true;
+}
+
+bool get_last_val(LinkedList *list, int *out) {
+  if (list->back == NULL) {
+    return false;
+  }
+  *out = list->back->val;
+  return true;
+}

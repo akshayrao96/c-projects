@@ -34,3 +34,7 @@ bool contains_val(LinkedList* list, int val);
 /* Return true if list is empty */
 bool is_empty(LinkedList* list);
 
+bool get_first_val(LinkedList* list, int * out);
+
+bool get_last_val(LinkedList* list, int * out);
+
