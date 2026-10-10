@@ -1,10 +1,12 @@
 #include <stdio.h>
 
-typedef struct {
+typedef struct Node {
     int val;
-    Node node;
+    struct Node* next;
 } Node;
 
 /* Create a node */
 Node* init_node(int val);
+
+void free_node(Node* node);
 
