@@ -37,4 +37,6 @@ int main() {
 
   get_last_val(list, &value);
   printf("EXPECTED 200, RECEIVED: %d\n", value);
+
+  free_list(list);
 }

@@ -55,7 +55,7 @@ bool insert(LinkedList *list, int val, int idx) {
     int curr_idx = 0;
     Node *curr_node = list->front;
 
-    while (curr_idx == idx - 1) {
+    while (curr_idx != idx - 1) {
       curr_node = curr_node->next;
       curr_idx++;
     }
@@ -165,4 +165,15 @@ bool get_last_val(LinkedList *list, int *out) {
   }
   *out = list->back->val;
   return true;
+}
+
+void free_list(LinkedList *list) {
+  Node *next = list->front;
+  Node *temp;
+  while ((temp = next) != NULL) {
+    next = temp->next;
+    free(temp);
+  }
+
+  free(list);
 }

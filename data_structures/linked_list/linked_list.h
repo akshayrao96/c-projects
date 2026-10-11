@@ -38,3 +38,5 @@ bool get_first_val(LinkedList* list, int * out);
 
 bool get_last_val(LinkedList* list, int * out);
 
+void free_list(LinkedList* list);
+
