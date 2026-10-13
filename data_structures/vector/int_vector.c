@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
+#include <stdlib.h>
 
 typedef struct {
   int *data;
@@ -23,4 +25,5 @@ bool push_back(Vec *v, int value) {
 
   v->data[v->len] = value;
   v->len++;
+  return true;
 }
