@@ -1,13 +1,13 @@
+#include "int_vector.h"
 #include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
-typedef struct {
-      int *data;
-      size_t cap;
-      size_t len;
-} Vec;
+Vec *init_vec() {
+      Vec *vec = (Vec *)malloc(sizeof(Vec));
+      vec->data = NULL;
+      vec->cap = 0;
+      vec->len = 0;
+      return vec;
+}
 
 bool push_back(Vec *v, int value) {
 
@@ -27,3 +27,5 @@ bool push_back(Vec *v, int value) {
       v->len++;
       return true;
 }
+
+int get_size(Vec *v) { return v->len; }
